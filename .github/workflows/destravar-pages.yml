@@ -1,0 +1,20 @@
+name: Destravar GitHub Pages
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/destravar-pages.yml
+permissions:
+  contents: read
+  pages: write
+jobs:
+  cancel-stuck-deployment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cancelar publicação travada de 8c72b855
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh api --method POST repos/${{ github.repository }}/pages/deployments/8c72b85510b26a76d5414663a9914fc00c5273f2/cancel
