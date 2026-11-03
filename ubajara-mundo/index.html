@@ -57,4 +57,5 @@ el("partnerForm").addEventListener("submit",e=>{e.preventDefault();if(!e.target.
 el("copyRequest").addEventListener("click",async()=>{if(!el("partnerForm").reportValidity())return;try{await navigator.clipboard.writeText(buildRequest());el("formStatus").textContent=partnerText[current].copied}catch(e){el("formStatus").textContent=partnerText[current].copyFailed}});
 const originalDraw=draw;draw=function(){originalDraw();document.querySelectorAll("#pedido-parceiro [data-i]").forEach(n=>{if(partnerText[current][n.dataset.i])n.textContent=partnerText[current][n.dataset.i]});updatePricing()};
 draw();
+el("lang").addEventListener("change",()=>draw());el("search").addEventListener("input",()=>draw());
 </script></body></html>
